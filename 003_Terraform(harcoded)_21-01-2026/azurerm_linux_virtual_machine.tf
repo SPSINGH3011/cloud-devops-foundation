@@ -1,33 +1,17 @@
 resource "azurerm_network_interface" "nic" {
-  depends_on = [ azurerm_subnet.subnet , azurerm_public_ip.pip]
   name                = "revision-nic5"
   location            = "central india"
   resource_group_name = "revision-rg5"
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.subnet.id
+    subnet_id                     = "/subscriptions/1e4f7c75-847c-48f7-b236-218b82663529/resourceGroups/revision-rg5/providers/Microsoft.Network/virtualNetworks/revision-vnet5/subnets/revision-subnet5"
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.pip.id
-  }
-}
-
-resource "azurerm_network_interface" "nic1" {
-  depends_on = [ azurerm_subnet.subnet2 ,azurerm_public_ip.pip1 ]
-  name                = "revision-nic6"
-  location            = "central india"
-  resource_group_name = "revision-rg5"
-
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.subnet.id
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.pip1.id
+    public_ip_address_id = "/subscriptions/1e4f7c75-847c-48f7-b236-218b82663529/resourceGroups/revision-rg5/providers/Microsoft.Network/publicIPAddresses/revision-PublicIp5"
   }
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  depends_on = [ azurerm_resource_group.rg , azurerm_virtual_network.vnet , azurerm_public_ip.pip ,azurerm_subnet.subnet ]
   name                = "revision-linux-machine01"
   location            = "central india"
   resource_group_name = "revision-rg5"
