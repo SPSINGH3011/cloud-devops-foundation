@@ -1,0 +1,5 @@
+ variable "rgs" {
+    
+ }
+
+ variable "stgs" {}
