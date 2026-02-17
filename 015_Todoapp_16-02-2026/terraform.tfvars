@@ -1,122 +1,95 @@
-rgs = {
+resource_groups = {
   fe = {
-    rg_name  = "todoapprg-fe"
+    name     = "rg-fe"
     location = "central india"
   }
-
   be = {
-    rg_name  = "todoapprg-be"
+    name     = "rg-be"
     location = "central india"
   }
 }
 
-vnet = {
-  fe-vnet = {
-    vnet_name           = "todoapp-fevnet"
+vnets = {
+  fe = {
+    vnet_name           = "vnet-fe"
     location            = "central india"
-    resource_group_name = "todoapprg-fe"
+    resource_group_name = "rg-fe"
     address_space       = ["10.0.0.0/16"]
   }
-
-
-  be-vnet = {
-    vnet_name           = "todoapp-bevnet"
+  be = {
+    vnet_name           = "vnet-be"
     location            = "central india"
-    resource_group_name = "todoapprg-be"
+    resource_group_name = "rg-be"
     address_space       = ["10.1.0.0/16"]
   }
 }
 
 subnets = {
-  fe-subnet = {
-    subnet_name          = "todoapp-fesubnet"
-    resource_group_name  = "todoapprg-fe"
-    virtual_network_name = "todoapp-fevnet"
+  fe = {
+    subnet_name          = "subnet-fe"
+    resource_group_name  = "rg-fe"
+    virtual_network_name = "vnet-fe"
     address_prefixes     = ["10.0.1.0/24"]
   }
-
-  be-subnet = {
-    subnet_name          = "todoapp-besubnet"
-    resource_group_name  = "todoapprg-be"
-    virtual_network_name = "todoapp-bevnet"
+  be = {
+    subnet_name          = "subnet-be"
+    resource_group_name  = "rg-be"
+    virtual_network_name = "vnet-be"
     address_prefixes     = ["10.1.1.0/24"]
   }
 }
 
-pip = {
-  fe-pip = {
-    pip_name            = "todoapp-fepip"
-    resource_group_name = "todoapprg-fe"
+pips = {
+  fe = {
+    pip_name            = "pip-fe"
     location            = "central india"
-    allocation_method   = "Static"
+    resource_group_name = "rg-fe"
   }
-
-  be-pip = {
-    pip_name            = "todoapp-bepip"
-    resource_group_name = "todoapprg-be"
+  be = {
+    pip_name            = "pip-be"
     location            = "central india"
-    allocation_method   = "Static"
-  }
-
-}
-
-nic = {
-  fe-nic = {
-    nic_name             = "todoapp-fenic"
-    location             = "central india"
-    resource_group_name  = "todoapprg-fe"
-    virtual_network_name = "todoapp-fevnet"
-    subnet_name          = "todoapp-fesubnet"
-    pip_name             = "todoapp-fepip"
-  }
-
-  be-nic = {
-    nic_name             = "todoapp-benic"
-    location             = "central india"
-    resource_group_name  = "todoapprg-be"
-    virtual_network_name = "todoapp-bevnet"
-    subnet_name          = "todoapp-besubnet"
-    pip_name             = "todoapp-bepip"
-
+    resource_group_name = "rg-be"
   }
 }
 
 nsg = {
-  fe-nsg = {
-    nsg_name             = "todoapp-fensg"
-    location             = "central india"
-    resource_group_name  = "todoapprg-fe"
-    virtual_network_name = "todoapp-fevnet"
-    subnet_name          = "todoapp-fesubnet"
+  fe = {
+    nsg_name            = "nsg-fe"
+    location            = "central india"
+    resource_group_name = "rg-fe"
   }
+  be = {
+    nsg_name            = "nsg-be"
+    location            = "central india"
+    resource_group_name = "rg-be"
+  }
+}
 
-  be-nsg = {
-    nsg_name             = "todoapp-bensg"
-    location             = "central india"
-    resource_group_name  = "todoapprg-be"
-    virtual_network_name = "todoapp-bevnet"
-    subnet_name          = "todoapp-besubnet"
+nic = {
+  fe = {
+    nic_name            = "nic-fe"
+    location            = "central india"
+    resource_group_name = "rg-fe"
+  }
+  be = {
+    nic_name            = "nic-be"
+    location            = "central india"
+    resource_group_name = "rg-be"
   }
 }
 
 vms = {
-
-  fe-vm = {
-    vm_name              = "todoapp-fe"
-    location             = "central india"
-    resource_group_name  = "todoapprg-fe"
-    nic_name             = "todoapp-fenic"
-    virtual_network_name = "todoapp-fevnet"
-    subnet_name          = "todoapp-fesubnet"
-
+  fe = {
+    vm_name             = "vm-fe"
+    location            = "central india"
+    resource_group_name = "rg-fe"
+    vm_size             = "Standard_D2as_v5"
   }
-
-  be-vm = {
-    vm_name              = "todoapp-be"
-    location             = "central india"
-    resource_group_name  = "todoapprg-be"
-    nic_name             = "todoapp-benic"
-    virtual_network_name = "todoapp-bevnet"
-    subnet_name          = "todoapp-besubnet"
+  be = {
+    vm_name             = "vm-be"
+    location            = "central india"
+    resource_group_name = "rg-be"
+    vm_size             = "Standard_D2as_v5"
   }
+  
 }
