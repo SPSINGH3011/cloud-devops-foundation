@@ -1,0 +1,289 @@
+1. git init
+
+👉 Naya Git repository initialize karta hai
+
+2 git add (git add file_name)
+
+👉 Specific file ko staging area me add karta hai
+
+3️ git add .
+
+👉 Saare changed files ko staging area me add karta hai
+
+4️ git push
+git push origin branch_name
+
+👉 Local commits ko remote repository me bhejta hai
+
+5️ git clone
+git clone repo_url
+👉 Remote repository ko local system me copy karta hai
+
+6️ git pull
+git pull origin branch_name
+👉 Remote changes ko fetch + merge karta hai
+
+7️ git fetch
+git fetch origin
+👉 Remote se latest changes lata hai bina merge kiye
+
+8️ git restore
+git restore file_name
+👉 Working directory ke changes ko discard karta hai
+
+9️ git reset
+git reset --hard commit_id
+👉 Commit / staging ko undo karta hai
+
+10 git revert
+git revert commit_id
+👉 Previous commit ko safely undo karta hai (new commit banata hai)
+
+
+
+11. git rebase
+git rebase branch_name
+👉 Commits ko re-arrange ya base change karta hai
+
+
+1️2. git stash
+
+👉 Temporary changes ko save karta hai bina commit kiye
+
+
+1️3. git cherry-pick
+git cherry-pick commit_id
+👉 Kisi specific commit ko current branch me laata hai
+
+1️4. Conflict Resolve
+git status
+git add file_name
+git commit
+👉 Git conflict manually file edit karke solve karte hain
+
+
+👉 pull = fetch + merge
+👉 reset = history change 
+👉 revert = safe undo
+
+
+
+
+## 7️⃣ `git fetch` (practical)
+
+### 🎯 Scenario
+
+`feature` branch pe kaam chal raha hai, kisi aur ne `main` me changes push kiye hain.
+
+
+git checkout feature
+git fetch origin
+
+
+👉 **Kuch change dikhega nahi**
+
+Check kar:
+
+
+git log origin/main --oneline
+
+
+👉 Remote `main` ke new commits dikh jaayenge
+
+Merge karna ho to:
+
+git merge origin/main
+
+
+---
+
+## 8️⃣ `git restore` (practical)
+
+### 🎯 Scenario
+
+File edit kiya but commit nahi karna, discard karna hai
+
+
+git checkout feature
+nano app.txt   # ya koi bhi file edit karo
+
+
+Ab file revert:
+
+
+git restore app.txt
+
+
+👉 File last committed state me wapas
+
+---
+
+## 9️⃣ `git reset --hard` (practical)
+
+### 🎯 Scenario
+
+Last commit galat ho gaya, pura undo karna hai
+
+
+git log --oneline
+
+
+Copy old commit id, phir:
+
+
+git reset --hard abc123
+
+
+👉 Commits + files dono rollback
+⚠️ **History change hoti hai**
+
+---
+
+## 🔟 `git revert` (practical)
+
+### 🎯 Scenario
+
+Production (`main`) me galat commit aa gaya, safely undo karna hai
+
+
+git checkout main
+git log --oneline
+git revert xyz789
+
+
+👉 New commit banega jo old commit ko reverse karega
+✅ **Safe for shared branches**
+
+---
+
+## 1️⃣1️⃣ `git rebase` (practical)
+
+### 🎯 Scenario
+
+`feature` branch ko `main` ke latest code pe lana hai
+
+
+git checkout feature
+git rebase main
+
+
+👉 Feature ke commits `main` ke upar re-apply honge
+👉 Clean linear history
+
+Agar conflict aaye:
+
+
+# file edit karo
+git add file_name
+git rebase --continue
+
+
+---
+
+## 1️⃣2️⃣ `git stash` (practical)
+
+### 🎯 Scenario
+
+Half work hai, branch switch karna hai
+
+
+git checkout feature
+nano temp.txt
+git stash
+
+
+👉 Changes hide ho gaye
+
+Branch switch:
+
+
+git checkout release
+
+
+Wapas laane ke liye:
+
+
+git checkout feature
+git stash pop
+
+
+---
+
+## 1️⃣3️⃣ `git cherry-pick` (practical)
+
+### 🎯 Scenario
+
+`feature` ka ek specific commit `release` me chahiye
+
+
+git checkout feature
+git log --oneline
+
+
+Commit ID copy karo, phir:
+
+
+git checkout release
+git cherry-pick commit_id
+
+
+👉 Sirf wahi commit release me aa gaya
+
+---
+
+## 1️⃣4️⃣ Conflict Resolve (REAL practical)
+
+### 🎯 Scenario
+
+Same file `main` aur `feature` dono me change hui
+
+
+git checkout feature
+git merge main
+
+
+Conflict aayega ❌
+
+
+git status
+
+
+File open karo:
+
+text
+<<<<<<< HEAD
+feature code
+=======
+main code
+>>>>>>> main
+
+
+### ✅ Resolve steps
+
+1. File edit karo (markers hatao)
+2. Save
+3. Commands:
+
+
+git add file_name
+git commit
+
+
+👉 Conflict resolved 🎉
+
+---
+
+## 🧠 Interview ready one-liners
+
+* **fetch** → sirf data laata hai
+* **restore** → working dir clean
+* **reset** → history rewrite
+* **revert** → safe undo
+* **rebase** → clean history
+* **stash** → temporary save
+* **cherry-pick** → single commit
+* **conflict** → manual resolve
+
+Agar bole to main **ek complete flow diagram** ya **real DevOps project branching strategy** bhi practical dikha deta hoon 😎
+
+
