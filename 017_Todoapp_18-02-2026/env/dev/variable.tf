@@ -31,24 +31,35 @@ variable "pips" {
   }))
 }
 
-# variable "nic" {
-#   type = map(object({
-#     nic_name            = string
-#     location            = string
-#     resource_group_name = string
-#     virtual_network_name = string
-#     subnet_name =string
-#     pip_name =string
-#   }))
-# }
-
 variable "nic" {
   type = map(object({
-    nic_name            = string
-    location            = string
-    resource_group_name = string
+    nic_name             = string
+    location             = string
+    resource_group_name  = string
     virtual_network_name = string
-    subnet_name =string
-    pip_name =string
+    subnet_name          = string
+    pip_name             = string
+  }))
+}
+
+variable "nsg" {
+  type = map(object({
+    nsg_name             = string
+    location             = string
+    resource_group_name  = string
+    subnet_name          = string
+    virtual_network_name = string
+  }))
+}
+
+variable "vms" {
+  type = map(object({
+    vm_name              = string
+    location             = string
+    resource_group_name  = string
+    vm_size              = string
+    nic_name             = string
+    subnet_name          = string
+    virtual_network_name = string
   }))
 }

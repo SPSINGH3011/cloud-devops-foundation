@@ -27,3 +27,15 @@ module "nic" {
     source = "../../modules/5.Nic"  
     nic = var.nic 
 }
+
+module "nsg" {
+    depends_on = [ module.rg ,module.subnet ,module.vnet]
+    source = "../../modules/6.NSG"  
+    nsg = var.nsg
+}
+
+module "linux_vm" {
+    depends_on = [ module.rg ,module.subnet ,module.vnet,module.nic,module.nsg,module.public_ip]
+    source = "../../modules/7.Linux_VM"  
+    vms = var.vms
+}
